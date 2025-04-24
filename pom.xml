@@ -10,6 +10,7 @@
     <packaging>pom</packaging>
     <modules>
         <module>SharedClasses</module>
+        <module>OrangeHRM_Admin</module>
     </modules>
 
     <properties>
@@ -18,7 +19,16 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
 
+
+
     <dependencies>
+
+        <dependency>
+            <groupId>io.github.bonigarcia</groupId>
+            <artifactId>webdrivermanager</artifactId>
+            <version>5.7.0</version>
+        </dependency>
+
         <dependency>
             <groupId>org.seleniumhq.selenium</groupId>
             <artifactId>selenium-java</artifactId>
@@ -30,7 +40,24 @@
             <artifactId>testng</artifactId>
             <version>7.9.0</version> <!-- Latest version as of April 2025 -->
             <scope>test</scope>
+
         </dependency>
+
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <version>1.18.34</version> <!-- Latest as of now -->
+            <scope>provided</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>com.aventstack</groupId>
+            <artifactId>extentreports</artifactId>
+            <version>5.1.1</version>
+        </dependency>
+
+
+
 
 
     </dependencies>

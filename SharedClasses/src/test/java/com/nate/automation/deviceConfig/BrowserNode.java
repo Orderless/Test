@@ -5,18 +5,18 @@ import org.openqa.selenium.remote.DesiredCapabilities;
 
 public class BrowserNode extends Node{
 
-    private WebDriver browserDriver;
+    private WebDriver BrowserDriver;
 
     public WebDriver getBrowserDriver() {
-        return browserDriver;
+        return BrowserDriver;
     }
     public void setBrowserDriver(WebDriver browserDriver) {
-        this.browserDriver = browserDriver;
+        BrowserDriver = browserDriver;
     }
 
     public BrowserNode(WebDriver browserDriver, String hostURL, DesiredCapabilities desiredCapabilities) {
         super(hostURL, desiredCapabilities);
-        this.browserDriver = browserDriver;
+        setBrowserDriver(browserDriver);
     }
 
 }
