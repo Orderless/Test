@@ -3,10 +3,13 @@ package com.nate.automation.steps;
 import com.nate.automation.deviceConfig.BrowserNode;
 import com.nate.automation.deviceConfig.Node;
 import com.nate.automation.pages.OrangeHRM_LoginPage;
+import com.nate.automation.utilities.ElementFunctionality;
 import io.github.bonigarcia.wdm.WebDriverManager;
 import org.openqa.selenium.edge.EdgeDriver;
 import org.testng.Assert;
 import org.testng.annotations.AfterTest;
+import org.testng.annotations.BeforeClass;
+import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
 
 import java.util.Map;
@@ -14,7 +17,10 @@ import java.util.concurrent.TimeUnit;
 
 public class Admin_duties extends BaseTest{
     private OrangeHRM_LoginPage loginPage;
+    private ElementFunctionality elementFunctionality;
 
+    @Parameters({"URL","Device"})
+    @BeforeClass(description = "Initializing Nodes")
     public void setUp(String URL,String device) {
         try
         {
@@ -57,7 +63,7 @@ public class Admin_duties extends BaseTest{
     @Test(description = "Admin Duties")
     public void AdminDuties() throws Exception
     {
-        loginPage = new OrangeHRM_LoginPage(testB, Devices);
+
 
         try
         {
@@ -67,14 +73,34 @@ public class Admin_duties extends BaseTest{
                 {
                     if(currentNode.getValue() instanceof BrowserNode)
                     {
-
                         try
                         {
-                            loginPage.enterUsername("Admin");
-                            loginPage.enterPassword("admin123");
-                            loginPage.clickLoginButton();
+                            loginPage = new OrangeHRM_LoginPage(testB, Devices);
+                            elementFunctionality = new ElementFunctionality(testB, Devices);
 
-                        }catch (Exception e)
+                                try
+                                {
+                                    loginPage.enterUsername("Admin");
+                                    loginPage.enterPassword("admin123");
+                                    loginPage.clickLoginButton();
+                                    Thread.sleep(5000);
+
+                                    //elementFunctionality.captureScreenshot("Login");
+                                    System.err.println("Login Successful");
+
+                                    //Now loggin out
+                                    loginPage.clickLogOut_dd();
+                                    Thread.sleep(1000);
+                                    loginPage.clickLogOut_btn();
+                                    System.err.println("Logout Successful");
+
+                                }catch (Exception e)
+                                {
+                                    Assert.fail();
+                                    e.printStackTrace();
+                                }
+                        }
+                        catch (Exception e)
                         {
                             Assert.fail();
                             e.printStackTrace();
@@ -105,7 +131,8 @@ public class Admin_duties extends BaseTest{
                     {
                         try
                         {
-                            testB.quit();
+                           // testB.quit();
+                            //System.out.println("Browser Closed");
 
                         }catch (Exception e)
                         {

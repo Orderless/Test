@@ -1,9 +1,10 @@
 package com.nate.automation.utilities;
 
+import com.aventstack.extentreports.Status;
+import com.aventstack.extentreports.markuputils.Markup;
+import com.nate.automation.extentReports.ExtentTestManager;
 import com.nate.automation.listeners.TestListener;
-import org.openqa.selenium.TimeoutException;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
+import org.openqa.selenium.*;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
@@ -50,5 +51,15 @@ public class ElementFunctionality extends TestListener {
             result = 0;
         }
         return result;
+    }
+
+    public void captureScreenshot(String testName)
+    {
+        String fullMessage = testName + " - " + Devices;
+        String base64Screenshot = "data:image/png;base64," + ((TakesScreenshot) BrowserDriver).getScreenshotAs(OutputType.BASE64);
+
+        ExtentTestManager.getTest().log(Status.INFO, (Markup) ExtentTestManager.getTest().addScreenCaptureFromBase64String(base64Screenshot, fullMessage));
+
+
     }
 }
