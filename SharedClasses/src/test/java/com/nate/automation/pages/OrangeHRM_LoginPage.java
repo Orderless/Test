@@ -29,6 +29,35 @@ public class OrangeHRM_LoginPage extends BaseTest {
     @FindBy(xpath = "//button[normalize-space()='Login']")
     private WebElement loginButton;
 
+    @FindBy(xpath = "//p[@class='oxd-userdropdown-name']")
+    private WebElement logOut_dd;
+
+    @FindBy(xpath = "//a[normalize-space()='Logout']")
+    private WebElement logOut_btn;
+
+    public void clickLogOut_btn() // under this dd there are more services to be performed
+    {
+        if (verifyElement.verifyElementValue(logOut_btn, "Log Out Button") == 1)
+        {
+            logOut_btn.click();
+        }
+        else
+        {
+            System.out.println("Log Out Button not found");
+        }
+    }
+    public void clickLogOut_dd() // under this dd there are more services to be performed
+    {
+        if (verifyElement.verifyElementValue(logOut_dd, "Log Out Drop Down") == 1)
+        {
+            logOut_dd.click();
+        }
+        else
+        {
+            System.out.println("Log Out Drop Down not found");
+        }
+    }
+
 
 
     public void enterUsername(String username)
