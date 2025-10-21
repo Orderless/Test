@@ -4,16 +4,16 @@ import com.nate.automation.deviceConfig.BrowserNode;
 import com.nate.automation.deviceConfig.Node;
 import com.nate.automation.pages.OrangeHRM_LoginPage;
 import com.nate.automation.utilities.ElementFunctionality;
-import io.github.bonigarcia.wdm.WebDriverManager;
 import org.openqa.selenium.edge.EdgeDriver;
+import org.openqa.selenium.edge.EdgeOptions;
 import org.testng.Assert;
 import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
 
+import java.util.HashMap;
 import java.util.Map;
-import java.util.concurrent.TimeUnit;
 
 public class Admin_duties extends BaseTest{
     private OrangeHRM_LoginPage loginPage;
@@ -37,11 +37,15 @@ public class Admin_duties extends BaseTest{
                     {
                          try
                         {
-                          WebDriverManager.edgedriver().setup();
-                          testB = new EdgeDriver();
-                          testB.get(URL);
-                          testB.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
-                          testB.manage().window().maximize();
+                          System.setProperty("webdriver.edge.driver","..\\src\\edgedriver\\msedgedriver.exe");
+
+                            EdgeOptions options = new EdgeOptions();
+                            Map<String, Object> edgePrefs = new HashMap<>();
+                            //edgePrefs.put("args", Arrays.asList("--headless", "--disable-gpu", "--window-size=1920,1200"));
+                            options.setCapability("ms:edgeOptions", edgePrefs);
+                            testB = new EdgeDriver(options);
+                            testB.get(url);
+                            testB.manage().window().maximize();
 
                         }catch (Exception e)
                       {
@@ -131,8 +135,8 @@ public class Admin_duties extends BaseTest{
                     {
                         try
                         {
-                           // testB.quit();
-                            //System.out.println("Browser Closed");
+                           testB.quit();
+                            System.out.println("Browser Closed");
 
                         }catch (Exception e)
                         {
