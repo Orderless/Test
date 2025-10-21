@@ -37,15 +37,19 @@ public class Admin_duties extends BaseTest{
                     {
                          try
                         {
-                          System.setProperty("webdriver.edge.driver","..\\src\\edgedriver\\msedgedriver.exe");
+                            System.setProperty("webdriver.edge.driver","..\\src\\edgedriver\\msedgedriver.exe");
 
                             EdgeOptions options = new EdgeOptions();
                             Map<String, Object> edgePrefs = new HashMap<>();
-                            //edgePrefs.put("args", Arrays.asList("--headless", "--disable-gpu", "--window-size=1920,1200"));
+
+                            options.addArguments("--headless");
+                            options.addArguments("--disable-gpu");
+                            options.addArguments("--window-size=1920,1200");
+
                             options.setCapability("ms:edgeOptions", edgePrefs);
                             testB = new EdgeDriver(options);
-                            testB.get(url);
-                            testB.manage().window().maximize();
+                            testB.get(URL);
+                            //testB.manage().window().maximize();
 
                         }catch (Exception e)
                       {
